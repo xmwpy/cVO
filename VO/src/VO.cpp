@@ -113,7 +113,7 @@ VOInfo VO::config_vo_car(std::vector<double>& s_state, std::vector<double>& o_st
     vo_info.exp_time = std::min(vo1.exp_time, std::min(vo2.exp_time, std::min(vo3.exp_time, vo4.exp_time)));
     vo_info.collision_flag = vo1.collision_flag | vo2.collision_flag | vo3.collision_flag | vo4.collision_flag;
     vo_info.min_dis = std::min(vo1.min_dis, std::min(vo2.min_dis, std::min(vo3.min_dis, vo4.min_dis)));
-    
+    vo_info.id = o_state[13];
     // Current center action 
     // double steer = action[1] * 0.1 + s_state[8];
     // double radius = 2.7 / tan(fabs(steer));

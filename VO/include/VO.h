@@ -16,6 +16,7 @@ struct VOInfo{
     double exp_time;
     bool collision_flag;
     double min_dis;
+    int id;
 
     VOInfo(){};
 };
@@ -65,7 +66,8 @@ PYBIND11_MODULE(VO_util, m){
     .def_readwrite("vo_flag", &VOInfo::vo_flag)
     .def_readwrite("exp_time", &VOInfo::exp_time)
     .def_readwrite("collision_flag", &VOInfo::collision_flag)
-    .def_readwrite("min_dis", &VOInfo::min_dis);
+    .def_readwrite("min_dis", &VOInfo::min_dis)
+    .def_readwrite("id", &VOInfo::id);
     
     py::class_<VO>(m, "VO")
     .def(py::init())
