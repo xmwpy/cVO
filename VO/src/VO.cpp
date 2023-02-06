@@ -149,6 +149,12 @@ VOInfo VO::config_vo_car(std::vector<double>& s_state, std::vector<double>& o_st
     return vo_info;
 }
 
+VOInfo VO::config_vo(std::vector<double>& s_state, std::vector<double>& o_state, std::vector<double>& action, std::string mode){
+    VOInfo vo = config_vo_circle2(s_state, o_state, action, mode);
+    return vo;
+}
+
+
 bool VO::vo_out_jud_vector(double vx, double vy, std::vector<double>& vo){
     std::vector<double> rel_vector = {vx - vo[0], vy - vo[1]};
     std::vector<double> line_left_vector = {cos(vo[2]), sin(vo[2])};

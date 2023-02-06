@@ -39,6 +39,9 @@ public:
     
     VOInfo config_vo_car(std::vector<double>& s_state, std::vector<double>& o_state, std::vector<double>& action, std::string mode);
 
+    VOInfo config_vo(std::vector<double>& s_state, std::vector<double>& o_state, std::vector<double>& action, std::string mode);
+
+
     bool vo_out_jud_vector(double vx, double vy, std::vector<double>& vo);
 
     static double distance_between_cars(xt::pyarray<double> state1, xt::pyarray<double> state2);
@@ -74,6 +77,7 @@ PYBIND11_MODULE(VO_util, m){
     .def(py::init<bool, double, double>())
     .def("config_vo_circle2", &VO::config_vo_circle2, py::return_value_policy::move)
     .def("config_vo_car", &VO::config_vo_car, py::return_value_policy::move)
+    .def("config_vo", &VO::config_vo, py::return_value_policy::move)
     .def("vo_out_jud_vector", &VO::vo_out_jud_vector)
     .def_static("between_vector", &VO::between_vector)
     .def_static("cal_exp_tim", &VO::cal_exp_tim)
