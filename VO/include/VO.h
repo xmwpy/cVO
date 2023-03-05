@@ -14,6 +14,7 @@ struct VOInfo{
     std::vector<double> observation_vo;
     bool vo_flag;
     double exp_time;
+    double exp_time2;
     bool collision_flag;
     double min_dis;
     int id;
@@ -70,7 +71,8 @@ PYBIND11_MODULE(VO_util, m){
     .def_readwrite("exp_time", &VOInfo::exp_time)
     .def_readwrite("collision_flag", &VOInfo::collision_flag)
     .def_readwrite("min_dis", &VOInfo::min_dis)
-    .def_readwrite("id", &VOInfo::id);
+    .def_readwrite("id", &VOInfo::id)
+    .def_readwrite("exp_time2", &VOInfo::exp_time2);
     
     py::class_<VO>(m, "VO")
     .def(py::init())

@@ -5,4 +5,5 @@ VO_util.egg-info/dependency_links.txt
 VO_util.egg-info/not-zip-safe
 VO_util.egg-info/requires.txt
 VO_util.egg-info/top_level.txt
+include/VO.h
 src/VO.cpp

@@ -24,6 +24,8 @@ VOInfo VO::config_vo_circle2(std::vector<double>& s_state, std::vector<double>& 
 
     double real_dis_mr = dis_mr;//sqrt(pow(rel_y, 2), pow(rel_x, 2));
 
+    exp_radius_ = r - mr;
+
     if (env_train_){
         if (dis_mr <= r + mr){
             dis_mr = r + mr;
@@ -59,12 +61,15 @@ VOInfo VO::config_vo_circle2(std::vector<double>& s_state, std::vector<double>& 
         rel_vy = 2 * action[1] - mvy - vy;
     }
     double exp_time = INF;
+    double exp_time2 = INF;
     if (vo_out_jud_vector(action[0], action[1], vo)){
         vo_flag = false;
         exp_time = INF;
+        exp_time2 = INF;
     }
     else{
         exp_time = cal_exp_tim(rel_x, rel_y, rel_vx, rel_vy, r+mr);
+        exp_time2 = cal_exp_tim(rel_x, rel_y, rel_vx, rel_vy, r+mr-exp_radius_);
         if (exp_time < ctime_threshold_){
             vo_flag = true;
         }
@@ -83,6 +88,7 @@ VOInfo VO::config_vo_circle2(std::vector<double>& s_state, std::vector<double>& 
     vo_info.exp_time = exp_time;
     vo_info.collision_flag = collision_flag;
     vo_info.min_dis = min_dis;
+    vo_info.exp_time2 = exp_time2;
     return vo_info;
 }
 
@@ -114,6 +120,7 @@ VOInfo VO::config_vo_car(std::vector<double>& s_state, std::vector<double>& o_st
     vo_info.collision_flag = vo1.collision_flag | vo2.collision_flag | vo3.collision_flag | vo4.collision_flag;
     vo_info.min_dis = std::min(vo1.min_dis, std::min(vo2.min_dis, std::min(vo3.min_dis, vo4.min_dis)));
     vo_info.id = o_state[13];
+    vo_info.exp_time2 = std::min(vo1.exp_time2, std::min(vo2.exp_time2, std::min(vo3.exp_time2, vo4.exp_time2)));
     // Current center action 
     // double steer = action[1] * 0.1 + s_state[8];
     // double radius = 2.7 / tan(fabs(steer));
